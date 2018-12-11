@@ -1,0 +1,85 @@
+<h1 class="text-center">
+  Welcome to {{ title }}!
+</h1>
+<p-table #dt [columns]="booksItems" [value]="datafilter()">
+    <ng-template pTemplate="caption">
+        <p-dropdown #drpd
+        [options]="selectAuthorsForFilter()"
+        [(ngModel)]="dropId"
+        [filter]="true"
+        [style]="{'width':'150px','height':'40px'}"
+        ></p-dropdown>
+    </ng-template>
+    <ng-template pTemplate="header" let-book>
+        <tr class="ui-g">
+            <th class="ui-g-1">Save</th>
+            <th class="ui-g-1">#</th>
+            <th class="ui-g-2">bookName</th>
+            <th class="ui-g-3">author</th>
+            <th class="ui-g-2">year</th>
+            <th class="ui-g-2">genre</th>
+            <th class="ui-g-1" colspan="1">Del</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-book  >
+        <tr class="ui-g">
+            <td class="ui-g-1">
+                <button pButton type="button"
+                class="ui-button-rounded ui-button-success"
+                icon="pi pi-save"
+                style="font-size: 0.75em;float: left"
+                (click)="save(book)"></button>
+            </td>
+            <td class="ui-g-1">{{book.id}}</td>
+            <td pEditableColumn class="ui-g-2">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="book.bookName">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{book.bookName}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn class="ui-g-3">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <p-dropdown [options]="selectAuthors()"
+                        [filter]="true"
+                        [style]="{'width':'100%','height':'50px'}"
+                        (onChange)="changeAuthors($event,book)"></p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <a routerLink="/authors" routerLinkActive="active">{{book.author}}</a>
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn class="ui-g-2">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="book.year">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{book.year}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td pEditableColumn class="ui-g-2">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input type="text" [(ngModel)]="book.genre">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        {{book.genre}}
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td class="ui-g-1">
+                <button pButton type="button"  class="ui-button-rounded ui-button-danger" icon="pi pi-trash" style="font-size: 0.75em;float:right" (click)="deleteBook(book)"></button>
+            </td>
+        </tr>
+     </ng-template>
+</p-table>
+<button  pButton type="button" label="Add" class="ui-button-rounded ui-button-info"  icon="pi pi-plus" style="font-size: 1em;float: left" (click)="addBook()"></button>
+<button pButton type="button" label="Cancel" class="ui-button-rounded ui-button-warning"  style="font-size: 1em;float: right" (click)="cancel()"></button>
+<div>{{statusMessage}}</div>
