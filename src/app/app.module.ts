@@ -12,7 +12,6 @@ import { InMemoryDataService }  from './services/in-memory-data.service';
 import { MessagesComponent }    from './components/messages/messages.component';
 import { AuthorsComponent } from './components/authors/authors.component';
 import { BooksComponent } from './components/books/books.component';
-import { DropDownComponent } from './components/drop-down/drop-down.component';
 ///
 import { AppRoutingModule }     from './app-routing.module';
 ///primeng
@@ -21,8 +20,7 @@ import {DataTableModule, SharedModule, ButtonModule, DialogModule, InputTextModu
 import {TableModule} from 'primeng/table';
 import {AccordionModule} from 'primeng/accordion';     //accordion and accordion tab
 import {MenuItem} from 'primeng/api';
-import {InputMaskModule} from 'primeng/inputmask';
-import { ModalwindowngComponent } from './components/modalwindowng/modalwindowng.component';                //api
+import {InputMaskModule} from 'primeng/inputmask';      //api
 @NgModule({
   declarations: [
     AppComponent,
